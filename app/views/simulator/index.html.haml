@@ -1,0 +1,17 @@
+.span5
+  = form_tag(dispenser_sync_path) do
+    %fieldset
+      %legend Dispense
+      %label Project id
+      = text_field_tag 'dispense[project_id]', @dispenser.project_id, :placeholder => '0001'
+      %label Employe id
+      = text_field_tag 'dispense[user_id]', @dispenser.user_id, :placeholder => '0002'
+      %label Plc id
+      = text_field_tag 'dispense[plc_id]', @dispenser.plc_id, :placeholder => '0003'
+      %label Dispenser id
+      = text_field_tag 'dispense[dispenser_id]', @dispenser.dispenser_id, :placeholder => '0003'
+      %label Quantity
+      = text_field_tag 'dispense[quantity]', @dispenser.quantity, :placeholder => '100'
+      .actions
+        =submit_tag 'Dispense', :class => 'btn btn-primary'
+= render 'result' if @result

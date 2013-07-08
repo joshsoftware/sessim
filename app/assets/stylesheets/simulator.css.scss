@@ -1,0 +1,18 @@
+// Place all the styles related to the simulator controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+body{
+  padding-top: 20px;
+}
+
+.main{
+  min-height: 500px;
+  margin: 0 auto;
+}
+
+.result{
+  padding-left: 20px;
+  border-left: 1px solid #000;
+  min-height: 500px;
+}
