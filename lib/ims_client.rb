@@ -4,19 +4,12 @@ class ImsClient
   include HTTParty
   base_uri(ENV['IMS_SERVER'] || 'localhost:3000')
 
-  def self.dispenser_sync(params = nil)
-    params ||= {
-      :dispense => [
-        :project_id => '1', 
-        :user_id => 'E-1', 
-        :plc_id => 1,  
-        :dispenser_id => '1',  
-        :quantity => 10, 
-        :timestamp => Time.now.to_i
-      ]
-    }
-
+  def self.dispenser_sync(params)
     self.post('/kvcom/dispensers/sync.json', {:body => params})
+  end
+
+  def self.plc_sync
+    self.get('/kvcom/plc/sync.json')
   end
 
 end

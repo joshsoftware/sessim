@@ -1,4 +1,5 @@
 .span5.result
   %h4 Result
-  = JSON.pretty_generate(@result.parsed_response)
+  %pre
+    = JSON.pretty_generate(@result.parsed_response) if @result
 

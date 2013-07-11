@@ -1,28 +1,38 @@
 class SimulatorController < ApplicationController
+
+  before_filter do
+    @placeholder = { 'dispense'=>
+      [
+        {'project_id'=>'1', 'user_id'=>'E-1', 'plc_id'=>'2', 'dispenser_id'=>'2', 'quantity'=>'10', 'timestamp' => Time.now.to_i},
+        {'project_id'=>'1', 'user_id'=>'E-2', 'plc_id'=>'2', 'dispenser_id'=>'2', 'quantity'=>'10', 'timestamp' => Time.now.to_i}
+      ]
+    }.to_json
+  end
+
   def index
-    @dispenser = Dispenser.new
   end
 
   def dispenser_sync
-    @dispenser = Dispenser.new(params[:dispense]) 
+    @data = params[:dispense]
+    unless @data.blank?
+      @data = JSON.parse(@data) 
+      @result = ImsClient.dispenser_sync(@data)
+      @data = @data.to_json 
+    else
+      @message = 'Fill json data in text area'
+    end
 
-    data = {
-      :dispense => [
-        @dispenser.to_json
-      ]
-    }
-
-    @result = ImsClient.dispenser_sync(data)
 
     render :action => :index
   end
 
+  def plc_sync
+    @result = ImsClient.plc_sync
+    render :action => :plc_sync
+  end
+
   def dispensers
+    render :action => :index
   end
 
-  def dispense
-  end
-
-  def sync_plc
-  end
 end
