@@ -6,7 +6,10 @@
         %span.pull-right{:style => 'color:red;'}
           #{@message}
       %label Dispense JSON data
-      = text_area_tag 'dispense', @data, {:rows => 10, :class => 'span6', :placeholder => @placeholder}
+      = text_area_tag 'dispense', @data, {:rows => 10, :class => 'span6', :placeholder => @placeholder.to_json}
       .actions
         =submit_tag 'Dispense', :class => 'btn btn-primary'
-= render 'result' if @result
+.span5.result 
+  = render 'result' if @result
+  %h4 Sample Data
+  %pre= JSON.pretty_generate(@placeholder)
